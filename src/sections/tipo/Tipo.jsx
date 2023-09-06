@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 const Tipo = () => {
     const [descricao, setDescricao] = useState("")
+    const [dados, setDados] = useState([])
     return (
         <div>
             <h2>Tipos</h2>
@@ -33,18 +34,22 @@ const Tipo = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Cancelado</td>
-                        <td>'2023-09-06 00:00:00"</td>
-                        <td>'2023-09-06 00:00:00"</td>
-                        <td>
-                            <button>Editar</button>
-                        </td>
-                        <td>
-                            <button>Remover</button>
-                        </td>
-                    </tr>
+                    {
+                        dados.map((item, index) => (
+                            <tr key={index}>
+                                <td>{item.id}</td>
+                                <td>{item.descricao}</td>
+                                <td>{item.created_at}</td>
+                                <td>{item.updated_at}</td>
+                                <td>
+                                    <button>Editar</button>
+                                </td>
+                                <td>
+                                    <button>Remover</button>
+                                </td>
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </table>
         </div>
