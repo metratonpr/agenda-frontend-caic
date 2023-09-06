@@ -1,9 +1,30 @@
 import './Tipo.css'
 import React, { useState } from 'react'
+import api from '../../api/Api'
 
 const Tipo = () => {
+    // Variaveis
     const [descricao, setDescricao] = useState("")
     const [dados, setDados] = useState([])
+    
+    // Funções
+
+    const salvar = (e) =>{
+        e.preventDefault()
+    }
+
+    const atualizar = (e) => {
+        e.preventDefault()
+    }
+
+    const deletar = () =>{
+        
+    }
+
+    const pegarTodos = () =>{
+        
+    }
+
     return (
         <div>
             <h2>Tipos</h2>
