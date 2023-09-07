@@ -1,14 +1,14 @@
 import './Tipo.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import api from '../../api/Api'
 
 const Tipo = () => {
     // Variaveis
     const [descricao, setDescricao] = useState("")
     const [dados, setDados] = useState([])
-    
-    // Funções
 
+     
+    // Funções
     const salvar = (e) =>{
         e.preventDefault()
     }
@@ -21,8 +21,18 @@ const Tipo = () => {
         
     }
 
-    const pegarTodos = () =>{
-        
+    const pegarTodos = () =>{ 
+        try {
+            const response = api.get('/tipos')
+            if(response.data){
+                setDados(response.data.data)
+            }else{
+                console.log("Array vazio")
+            }
+        } catch (error) {
+            console.log("Erro ao pegar todos: ",error)
+        }  
+
     }
 
     return (
