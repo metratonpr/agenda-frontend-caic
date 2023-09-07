@@ -10,7 +10,8 @@ const Tipo = () => {
     //executar ao renderizar a pagina
     useEffect(() => {
         pegarTodos()
-    })
+    },[])
+    
     // Funções
     const pegarTodos = () => {
         try {
@@ -57,7 +58,7 @@ const Tipo = () => {
         <div>
             <h2>Tipos</h2>
             <div>
-                <form>
+                <form onSubmit={salvar}>
                     <div>
                         <label>Descricao</label>
                         <input type='text'
