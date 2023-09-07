@@ -7,9 +7,27 @@ const Tipo = () => {
     const [descricao, setDescricao] = useState("")
     const [dados, setDados] = useState([])
 
-     
+    //executar ao renderizar a pagina
+    useEffect(() => {
+        pegarTodos()
+    })
     // Funções
-    const salvar = (e) =>{
+    const pegarTodos = () => {
+        try {
+            const response = api.get('/tipos')
+            if (response.data) {
+                console.log(response.data)
+                setDados(response.data.data)
+            } else {
+                console.log("Array vazio")
+                setDados([])
+            }
+        } catch (error) {
+            console.log("Erro ao pegar todos: ", error)
+        }
+
+    }
+    const salvar = (e) => {
         e.preventDefault()
     }
 
@@ -17,21 +35,7 @@ const Tipo = () => {
         e.preventDefault()
     }
 
-    const deletar = () =>{
-        
-    }
-
-    const pegarTodos = () =>{ 
-        try {
-            const response = api.get('/tipos')
-            if(response.data){
-                setDados(response.data.data)
-            }else{
-                console.log("Array vazio")
-            }
-        } catch (error) {
-            console.log("Erro ao pegar todos: ",error)
-        }  
+    const deletar = () => {
 
     }
 
