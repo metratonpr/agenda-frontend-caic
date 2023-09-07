@@ -10,12 +10,12 @@ const Tipo = () => {
     //executar ao renderizar a pagina
     useEffect(() => {
         pegarTodos()
-    },[])
-    
+    }, [])
+
     // Funções
-    const pegarTodos = () => {
+    const pegarTodos = async () => {
         try {
-            const response = api.get('/tipos')
+            const response = await api.get('/tipos')
             if (response.data) {
                 console.log(response.data)
                 setDados(response.data.data)
@@ -28,15 +28,18 @@ const Tipo = () => {
         }
 
     }
-    const salvar = (e) => {
+    const salvar = async (e) => {
         e.preventDefault()
         try {
             if (descricao.length > 0) {
                 const item = { descricao }
 
-                const response = api.post('/tipos', item)
+                const response = await api.post('/tipos', item)
+
+                console.log(response.data)
                 if (response.data) {
-                    console.log(response.data)
+                setDados([...dados,response.data])
+                // pegarTodos()
                 } else {
                     console.log('Salvar retorno vazio.')
                 }
