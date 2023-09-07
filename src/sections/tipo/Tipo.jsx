@@ -29,6 +29,20 @@ const Tipo = () => {
     }
     const salvar = (e) => {
         e.preventDefault()
+        try {
+            if (descricao.length > 0) {
+                const item = { descricao }
+
+                const response = api.post('/tipos', item)
+                if (response.data) {
+                    console.log(response.data)
+                } else {
+                    console.log('Salvar retorno vazio.')
+                }
+            }
+        } catch (error) {
+            console.log("Erro ao salvar tipo: ", error)
+        }
     }
 
     const atualizar = (e) => {
