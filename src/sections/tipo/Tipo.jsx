@@ -38,8 +38,8 @@ const Tipo = () => {
 
                 console.log(response.data)
                 if (response.data) {
-                setDados([...dados,response.data])
-                // pegarTodos()
+                    setDados([...dados, response.data])
+                    // pegarTodos()
                 } else {
                     console.log('Salvar retorno vazio.')
                 }
@@ -53,7 +53,15 @@ const Tipo = () => {
         e.preventDefault()
     }
 
-    const deletar = () => {
+    const deletar = async (item) => {
+        try {
+            if (item) {
+                const response = await api.delete('/tipos/' + item.id)
+                pegarTodos()
+            }
+        } catch (error) {
+            console.log("Erro ao salvar tipo: ", error)
+        }
 
     }
 
