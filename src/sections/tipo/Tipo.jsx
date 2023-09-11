@@ -56,8 +56,10 @@ const Tipo = () => {
     const deletar = async (item) => {
         try {
             if (item) {
-                const response = await api.delete('/tipos/' + item.id)
-                pegarTodos()
+                await api.delete('/tipos/' + item.id)
+                // pegarTodos()
+                const novaColecao = dados.filter((dado) => dado.id !== item.id);
+                setDados(novaColecao);
             }
         } catch (error) {
             console.log("Erro ao salvar tipo: ", error)
@@ -106,7 +108,7 @@ const Tipo = () => {
                                     <button>Editar</button>
                                 </td>
                                 <td>
-                                    <button>Remover</button>
+                                    <button onClick={() => deletar(item)}>Remover</button>
                                 </td>
                             </tr>
                         ))
