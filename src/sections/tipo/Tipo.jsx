@@ -4,8 +4,10 @@ import api from '../../api/Api'
 
 const Tipo = () => {
     // Variaveis
+    const [id, setId] = useState("")
     const [descricao, setDescricao] = useState("")
     const [dados, setDados] = useState([])
+    const [editavel, setEditavel] = useState(false)
 
     //executar ao renderizar a pagina
     useEffect(() => {
@@ -49,8 +51,43 @@ const Tipo = () => {
         }
     }
 
-    const atualizar = (e) => {
+    const editar = (item) => {
+        setId(item.id)
+        setDescricao(item.descricao)
+        setEditavel(true)
+    }
+
+    const limpar = () => {
+        setId("")
+        setDescricao("")
+        setEditavel(false)
+    }
+
+
+    const atualizar = async (e) => {
         e.preventDefault()
+        try {
+            if (descricao.length > 0) {
+                const item = { descricao }
+
+                const response = await api.put('/tipos/' + id, item)
+
+                console.log(response.data)
+                if (response.data) {
+                    const updatedData = dados.map((dado) =>
+                        dado.id === id ? { ...dado, descricao: response.data.descricao } : dado
+                    );
+                    setDados(updatedData);
+                    limpar();
+                    // pegarTodos()
+                } else {
+                    console.log('Salvar retorno vazio.')
+                }
+            }
+        } catch (error) {
+            console.log("Erro ao salvar tipo: ", error)
+        }
+
     }
 
     const deletar = async (item) => {
@@ -69,18 +106,17 @@ const Tipo = () => {
 
     return (
         <div>
-            <h2>Tipos</h2>
+            <h2>{editavel ? "Editar Tipo" : "Tipos"}</h2>
             <div>
-                <form onSubmit={salvar}>
+                <form onSubmit={editavel ? atualizar : salvar}>
                     <div>
                         <label>Descricao</label>
-                        <input type='text'
-                            value={descricao}
+                        <input type='text' value={descricao}
                             onChange={(e) => setDescricao(e.target.value)}
                         />
                         <div>
-                            <button type="submit">Salvar</button>
-                            <button type="reset">Limpar</button>
+                            <button type="submit">{editavel ? "Atualizar" : "Salvar"}</button>
+                            <button onClick={() => limpar()}>Limpar</button>
                         </div>
                     </div>
                 </form>
@@ -105,7 +141,7 @@ const Tipo = () => {
                                 <td>{item.created_at}</td>
                                 <td>{item.updated_at}</td>
                                 <td>
-                                    <button>Editar</button>
+                                    <button onClick={() => editar(item)}>Editar</button>
                                 </td>
                                 <td>
                                     <button onClick={() => deletar(item)}>Remover</button>
