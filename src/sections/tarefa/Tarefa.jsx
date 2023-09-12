@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 const Tarefa = () => {
+    const [formulario, setFormulario] = useState({
+        id: "",
+        data: "",
+        assunto : "", 
+        descricao: "", 
+        contato: "", 
+        tipo_id: "",
+        editable: false})
     // 'data', 'assunto', 'descricao', 'contato', 'tipo_id'
     return (
         <div>
