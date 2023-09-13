@@ -5,11 +5,12 @@ const Tarefa = () => {
     const [formulario, setFormulario] = useState({
         id: "",
         data: "",
-        assunto : "", 
-        descricao: "", 
-        contato: "", 
+        assunto: "",
+        descricao: "",
+        contato: "",
         tipo_id: "",
-        editable: false})
+        editable: false
+    })
     // 'data', 'assunto', 'descricao', 'contato', 'tipo_id'
     return (
         <div>
@@ -17,7 +18,7 @@ const Tarefa = () => {
             <form action="">
                 <div>
                     <label htmlFor="data">Data</label>
-                    <input type="date" id="data" name="data" />
+                    <input type="date" id="data" name="data" value={formulario.data} />
                 </div>
                 <div>
                     <label htmlFor="assunto">Assunto</label>
