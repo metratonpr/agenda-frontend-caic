@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="container">
       <Tarefa />
-      {/* <Tipo />         */}
+      {/* <Tipo />        ; */}
     </div>
   );
 }
