@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/Api";
 
-
 const Tarefa = () => {
     const [tarefas, setTarefas] = useState([])
     const [tipos, setTipos] = useState([])
@@ -16,7 +15,6 @@ const Tarefa = () => {
     })
 
     const limpar = () => {
-
         const initial_state = {
             id: "",
             data: "",
@@ -26,7 +24,6 @@ const Tarefa = () => {
             tipo_id: "",
             editable: false
         }
-
         setFormulario(initial_state)
     }
 
